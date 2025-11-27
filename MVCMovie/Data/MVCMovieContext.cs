@@ -1,3 +1,6 @@
+﻿using Microsoft.EntityFrameworkCore;
+using MVCMovie.Models;
+using MVCMovie.Models;
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
