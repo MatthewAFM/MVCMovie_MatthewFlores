@@ -1,0 +1,50 @@
+﻿@model IEnumerable<MVCMovie.Models.Book>
+
+<h2>Biblioteca</h2>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Agregar Libro</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Portada</th>
+            <th>Nombre</th>
+            <th>Autor</th>
+            <th>Lanzamiento</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @if (!string.IsNullOrEmpty(item.Portada))
+            {
+                <img src="@item.Portada" width="80" />
+            }
+        </td>
+        <td>@item.Nombre</td>
+        <td>@item.Autor</td>
+        <td>@item.Lanzamiento.ToShortDateString()</td>
+        <td>
+            @(item.Prestado ? "Prestado" : "Disponible")
+        </td>
+        <td>
+            @if (!item.Prestado)
+            {
+                <a class="btn btn-warning" asp-action="Prestar" asp-route-id="@item.Id">Prestar</a>
+            }
+            else
+            {
+                <a class="btn btn-success" asp-action="Devolver" asp-route-id="@item.Id">Devolver</a>
+            }
+        </td>
+    </tr>
+}
+    </tbody>
+</table>

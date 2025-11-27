@@ -4,6 +4,7 @@ using MVCMovie.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVCMovie.Migrations
 {
     [DbContext(typeof(MVCMovieContext))]
-    partial class MVCMovieContextModelSnapshot : ModelSnapshot
+    [Migration("20251124201243_Rating")]
+    partial class Rating
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace MVCMovie.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("MVCMovie.Models.Book", b =>
+            modelBuilder.Entity("MvcMovie.Models.Movie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,26 +33,24 @@ namespace MVCMovie.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Autor")
-                        .IsRequired()
+                    b.Property<string>("Genre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Lanzamiento")
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<string>("Rating")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ReleaseDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Nombre")
-                        .IsRequired()
+                    b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Portada")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Prestado")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Books");
+                    b.ToTable("Movie");
                 });
 #pragma warning restore 612, 618
         }
